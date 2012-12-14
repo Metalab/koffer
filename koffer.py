@@ -40,6 +40,7 @@ class Game:
         else:
             if button != self.sequence[self.current_button]:
                 self.player_dies()
+                self.sequence = []
                 self.next_player()
             else:
                 self.current_button += 1
