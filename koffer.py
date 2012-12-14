@@ -1,8 +1,9 @@
 
 import sys
 import os
+import logging
 
-psmoveapi_build = os.path.join(os.path.dirname(__file__), '..', 'psmoveapi', 'build'))
+psmoveapi_build = os.path.join(os.path.dirname(__file__), '..', 'psmoveapi', 'build')
 sys.path.insert(0, psmoveapi_build)
 
 import time
@@ -61,11 +62,11 @@ class Game:
         move.update_leds()
 
         self.eliminated.append(self.current_player)
-        print 'eliminated:', self.eliminated
-        print 'players:', len(self.moves)
+        logging.debug('eliminated: ' + ','.join(map(repr, self.eliminated)))
+        logging.debug('players: ' + repr(len(self.moves)))
         if len(self.eliminated) == len(self.moves) - 1:
             winner = list(set(range(len(self.moves))).difference(set(self.eliminated)))[0]
-            print 'winner:', winner
+            logging.info('winner: ' + repr(winner))
             move = self.moves[winner]
             while True:
                 move.set_leds(0, 255, 0)
@@ -84,7 +85,7 @@ class Game:
 
         self.moves[self.current_player].set_leds(255, 255, 255)
         self.current_button = 0
-        print 'current player:', self.current_player
+        logging.debug('current player: ' + repr(self.current_player))
 
 moves = [psmove.PSMove(i) for i in range(psmove.count_connected())]
 game = Game(moves)
