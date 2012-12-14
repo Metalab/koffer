@@ -12,6 +12,10 @@ import time
 import math
 import psmove
 
+import pygame
+
+pygame.mixer.init()
+
 buttons = [
     psmove.Btn_SQUARE,
     psmove.Btn_TRIANGLE,
@@ -26,6 +30,9 @@ colors = [
     (255, 0, 0),
 ]
 
+sounds = [pygame.mixer.Sound('button%d.wav' % i) for i in range(4)]
+print sounds
+
 class Game:
     def __init__(self, moves):
         self.moves = moves
@@ -37,13 +44,16 @@ class Game:
 
     def on_button(self, index, button):
         if self.current_button == len(self.sequence):
+            sounds[buttons.index(button)].play()
             self.sequence.append(button)
             self.next_player()
         else:
             if button != self.sequence[self.current_button]:
                 self.player_dies()
+                self.sequence = []
                 self.next_player()
             else:
+                sounds[buttons.index(button)].play()
                 self.current_button += 1
 
     def player_dies(self):
