@@ -6,6 +6,8 @@ import logging
 psmoveapi_build = os.path.join(os.path.dirname(__file__), '..', 'psmoveapi', 'build')
 sys.path.insert(0, psmoveapi_build)
 
+logging.basicConfig(level=logging.DEBUG)
+
 import time
 import math
 import psmove
