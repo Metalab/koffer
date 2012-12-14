@@ -31,7 +31,6 @@ colors = [
 ]
 
 sounds = [pygame.mixer.Sound('button%d.wav' % i) for i in range(4)]
-print sounds
 
 class Game:
     def __init__(self, moves):
