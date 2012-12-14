@@ -34,16 +34,15 @@ class Game:
         self.next_player()
 
     def on_button(self, index, button):
-        if index == self.current_player:
-            if self.current_button == len(self.sequence):
-                self.sequence.append(button)
+        if self.current_button == len(self.sequence):
+            self.sequence.append(button)
+            self.next_player()
+        else:
+            if button != self.sequence[self.current_button]:
+                self.player_dies()
                 self.next_player()
             else:
-                if button != self.sequence[self.current_button]:
-                    self.player_dies()
-                    self.next_player()
-                else:
-                    self.current_button += 1
+                self.current_button += 1
 
     def player_dies(self):
         move = self.moves[self.current_player]
@@ -93,12 +92,13 @@ game = Game(moves)
 while True:
     for idx, move in enumerate(moves):
         while move.poll():
-            pressed, released = move.get_button_events()
-            for btn_idx, button in enumerate(buttons):
-                if pressed & button:
-                    move.set_leds(*colors[btn_idx])
-                elif released & button:
-                    game.on_button(idx, button)
+            if game.current_player == idx:
+                pressed, released = move.get_button_events()
+                for btn_idx, button in enumerate(buttons):
+                    if pressed & button:
+                        move.set_leds(*colors[btn_idx])
+                    elif released & button:
+                        game.on_button(idx, button)
 
         move.update_leds()
 
