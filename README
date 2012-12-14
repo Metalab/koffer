@@ -6,3 +6,29 @@ A Super Gamedev Weekend 2012 Game
 
 http://metalab.at/wiki/Super_Gamedev_Weekend
 
+
+HOW TO
+======
+
+You need:
+
+ - Python 2 or Python 3
+ - PS Move API (http://thp.io/2010/psmove/) + Python bindings
+ - PyGame (http://www.pygame.org/)
+ - 2 or more PS Move Motion Controllers
+
+Gameplay:
+
+ 1. Only the 4 buttons (square, triangle, cross, circle) are used
+ 2. When the controller glows WHITE, it's the player's turn
+ 3. The first player presses one of the 4 buttons, then it's the next
+    player's turn
+ 4. The next player presses the button that the first player pressed, and
+    another button of their choice, then it's the next player's turn
+ 5. The next player presses the button that the first player pressed and
+    the button that the second player pressed and another button of their
+    choice (and so on)
+ 6. If a player presses the wrong sequence, their are eliminated (the
+    controller will vibrate and blink red) - the sequence is cleared, and
+    the remaining players will battle to the end
+
