@@ -76,7 +76,7 @@ class Game:
         logging.debug('players: ' + repr(len(self.moves)))
         if len(self.eliminated) == len(self.moves) - 1:
             winner = list(set(range(len(self.moves))).difference(set(self.eliminated)))[0]
-            logging.info('winner: ' + repr(winner))
+            logging.info('winner: ' + repr(winner) + ' with sequence length: ' + str(len(self.sequence)))
             move = self.moves[winner]
             while True:
                 move.set_leds(0, 255, 0)
